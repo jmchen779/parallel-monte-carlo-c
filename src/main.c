@@ -1,1 +1,63 @@
+#include "../include/montecarlo_integrations.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <omp.h>
+#include <math.h>
+#include <string.h>
+#include <gsl/gsl_rng.h>
+#include <float.h>
 
+
+// a program for monte carlo integration. The program takes the command line arguments
+// N (number of random samples), the lower end of integration range, the upper end of integration range,
+// an optional seed paramter and an optionl max of the function parameter
+int main(int argc, char *argv[]){
+    double t0 = omp_get_wtime();
+    int k = 8;
+    int seed = 0;
+
+    //read in the arguments
+    int argi = 0;
+    int N = atoi(argv[++argi]);     printf("N = %d\n", N);
+    double x_start = atof(argv[++argi]);     printf("Lower bound = %.6lf\n", x_start);
+    double x_end = atof(argv[++argi]);     printf("Upper bound = %.6lf\n", x_end);
+    if (argi < argc -3){
+        seed = atol(argv[++argi]);
+    }
+    else {
+        //placeholder, fix later
+        seed = 1234;
+    }
+    printf("Seed=%ld\n", seed);
+    double max_value;
+    int max_supplied; 
+    if (argi < argc -2){
+        max_value = atof(argv[++argi]);
+        max_supplied =1;
+    }
+    else {
+        max_supplied = 0;
+    }
+    double min_value;
+    int min_supplied; 
+    if (argi < argc -1){
+        min_value = atof(argv[++argi]);
+        min_supplied =1;
+    }
+    else {
+        min_supplied = 0;
+    }
+    //if min and max are not supplied, discretize the function and find the max and min
+    if ((min_supplied == 0) || (max_supplied == 0) ){
+        compute_min_max(&min_value, &max_value, x_start, x_end, k);
+    }
+    printf("Max = %.6lf and Min = %.6lf\n", max_value, min_value);
+    //compute percentage of points thta land under curve
+    double integral = integrate(x_start, x_end, min_value, max_value, N, k, seed);
+    //rescale to integration region
+    integral = integral*((x_end - x_start) * (max_value - min_value));
+    printf("The integral value is: %.6lf\n", integral);
+    double t_end = omp_get_wtime();
+    printf("Time to Complete: %.6lf\n", t_end - t0);
+    return 0;
+}
