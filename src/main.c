@@ -5,6 +5,7 @@
 #include <math.h>
 #include <string.h>
 #include <gsl/gsl_rng.h>
+#include <time.h>
 #include <float.h>
 
 
@@ -14,21 +15,24 @@
 int main(int argc, char *argv[]){
     double t0 = omp_get_wtime();
     int k = 8;
-    int seed = 0;
-
+    unsigned long int seed = 0;
     //read in the arguments
     int argi = 0;
     int N = atoi(argv[++argi]);     printf("N = %d\n", N);
     double x_start = atof(argv[++argi]);     printf("Lower bound = %.6lf\n", x_start);
     double x_end = atof(argv[++argi]);     printf("Upper bound = %.6lf\n", x_end);
-    if (argi < argc -3){
-        seed = atol(argv[++argi]);
+    if (argi < argc -1){
+        //read in an unsigned long int
+        unsigned long int var_seed = strtoul((argv[++argi]), NULL, 10);
+        seed = (unsigned long int)var_seed;
     }
     else {
         //placeholder, fix later
-        seed = 1234;
+        srand48((long int)time(NULL));
+        long int temp_seed = lrand48();
+        seed = (unsigned long int)temp_seed;
     }
-    printf("Seed=%ld\n", seed);
+    printf("Seed=%lu\n", seed);
     double max_value;
     int max_supplied; 
     if (argi < argc -2){
