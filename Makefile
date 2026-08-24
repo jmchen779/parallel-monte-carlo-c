@@ -11,4 +11,4 @@ clean:
 	-rm -f integrate *.o
 
 run: integrate
-	./integrate 160000000 0 1
+	./integrate 160000000 8 0 1

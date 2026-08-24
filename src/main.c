@@ -14,11 +14,11 @@
 // an optional seed paramter and an optionl max of the function parameter
 int main(int argc, char *argv[]){
     double t0 = omp_get_wtime();
-    int k = 8;
     unsigned long int seed = 0;
     //read in the arguments
     int argi = 0;
     int N = atoi(argv[++argi]);     printf("N = %d\n", N);
+    int k = atoi(argv[++argi]);     printf("Number of Threads: %d\n", k);
     double x_start = atof(argv[++argi]);     printf("Lower bound = %.6lf\n", x_start);
     double x_end = atof(argv[++argi]);     printf("Upper bound = %.6lf\n", x_end);
     if (argi < argc -1){
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
     printf("Seed=%lu\n", seed);
     double max_value;
     int max_supplied; 
-    if (argi < argc -2){
+    if (argi < argc -1){
         max_value = atof(argv[++argi]);
         max_supplied =1;
     }
