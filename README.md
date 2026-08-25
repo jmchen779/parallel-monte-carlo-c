@@ -29,9 +29,12 @@ You can also run the code on custom settings using
 ```
 ./integrate N k lower_bound upper_bound seed max min
 ```
-```N``` is the number of points used to estimate the area, ```k``` is the number of OpenMp threads used in the calculation, ```lower_bound``` and ```upper_bound``` are the lower and upper bounds of integration, respectively. ```seed``` is an optional parameter that allows you to specify a custom seed for the random number generator. The seed should be an positive integer. If no seed is supplied, a random seed will be generated. ```max``` and ```min``` are optional parameters allow you to specify the maximum and mininum of your function. If these are provided, the program will save time by not computing the max and min. 
+```N``` is the number of points used to estimate the area, ```k``` is the number of OpenMp threads used in the calculation, ```lower_bound``` and ```upper_bound``` are the lower and upper bounds of integration, respectively. ```seed``` is an optional parameter that allows you to specify a custom seed for the random number generator. The seed should be a positive integer. If no seed is supplied, a random seed will be generated. ```max``` and ```min``` are optional parameters that allow you to specify the maximum and mininum of your function. If these are provided, the program will save time by not computing the max and min. 
 
 For example, to run a program with 10000 samples on 4 threads with an integration range of -10 10, a seed of 123456789, and the integrand maximum and minimum are 3 and -3 you would do
 ```
 ./integrate 10000 4 -10 10 123456789 3 -3
 ```
+
+# Performance and Scaling Benchmarks
+Coming soon
