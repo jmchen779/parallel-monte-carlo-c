@@ -17,13 +17,19 @@ make
 
 Currently the code only compiles on gcc. You may need to install gsl if you haven't done so already.
 
-Before starting a run, you may want to change your integrand. You can do so by modifying the first function in the monte_carlo.c file. 
-
-You can run the code on default settings by running
+The default integrand is 3x^2. You may feel the need to integrate a custom function, in which case you can pass a custom function in by
 ```
+make clean
+make FORMULA="Your function here"
+```
+Any function using standard operations or in the math library is supported. For example, to integrate pi^sin(x)
+from 0 to 1
+```
+make clean
+make FORMULA="pow(M_PI, sin(x))"
 make run
 ```
-Default settings is 160000000 points, 8 threads, and an integration range of 0 to 1.
+Using ```make run``` will run the program on default settings, which is 160000000 points, 8 threads, and an integration range of 0 to 1.
 
 You can also run the code on custom settings using
 ```

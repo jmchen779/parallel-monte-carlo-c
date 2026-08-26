@@ -27,7 +27,6 @@ int main(int argc, char *argv[]){
         seed = (unsigned long int)var_seed;
     }
     else {
-        //placeholder, fix later
         srand48((long int)time(NULL));
         long int temp_seed = lrand48();
         seed = (unsigned long int)temp_seed;
@@ -56,6 +55,12 @@ int main(int argc, char *argv[]){
         compute_min_max(&min_value, &max_value, x_start, x_end, k);
     }
     printf("Max = %.6lf and Min = %.6lf\n", max_value, min_value);
+    if ((min_value > 0) && (max_value > 0)){
+        min_value = 0;
+    }
+    if ((min_value < 0) && (max_value < 0)){
+        max_value = 0;
+    }
     //compute percentage of points thta land under curve
     double integral = integrate(x_start, x_end, min_value, max_value, N, k, seed);
     //rescale to integration region

@@ -12,7 +12,7 @@
 //the integrand
 double integrand(double x){
     //update this line with function fo your choice
-    return 5*x;
+    return CUSTOM_FORMULA(x);
 }
 
 //function that computes min and max of our previously defined function. Takes pointers to variables holding min/max
