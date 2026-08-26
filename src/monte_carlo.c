@@ -20,7 +20,7 @@ void compute_min_max(double* min, double* max, double x_start, double x_end, int
     //step is dx, steps is number of times we evauluate function on interval [a, b]
         double max_value = *(max);
         double min_value = *(min);
-        max_value = DBL_MIN;
+        max_value = -DBL_MAX;
         min_value = DBL_MAX;
         double dx = 1e-3;
         int steps = (int)((x_end - x_start) / dx);

@@ -55,6 +55,8 @@ int main(int argc, char *argv[]){
         compute_min_max(&min_value, &max_value, x_start, x_end, k);
     }
     printf("Max = %.6lf and Min = %.6lf\n", max_value, min_value);
+    
+    //additional integration logic
     if ((min_value > 0) && (max_value > 0)){
         min_value = 0;
     }
